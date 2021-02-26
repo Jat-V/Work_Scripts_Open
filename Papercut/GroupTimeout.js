@@ -21,4 +21,4 @@ function printJobHook(inputs, actions) {
   }
 }
 
-//This was achived with the help of Papercut
+//This was achieved with the help of Papercut
