@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+function change(){
+	sudo sed -i.bak s/$A\.$B\.$C\.$D/$W\.$X\.$Y\.$Z/g /private/etc/cups/printers.conf
+        sudo diff /private/etc/cups/printers.conf /private/etc/cups/printers.conf.bak
+}
+
+function main(){
+	read -p "Enter IP Address: " IPADD
+	read -p "Enter the HOST Address: " HOSTADD
+	A="$(cut -d '.' -f1 <<< "$IPADD")"
+	B="$(cut -d '.' -f2 <<< "$IPADD")"
+	C="$(cut -d '.' -f3 <<< "$IPADD")"
+	D="$(cut -d '.' -f4 <<< "$IPADD")"
+	
+	W="$(cut -d '.' -f1 <<< "$HOSTADD")"
+	X="$(cut -d '.' -f2 <<< "$HOSTADD")"
+	Y="$(cut -d '.' -f3 <<< "$HOSTADD")"
+	Z="$(cut -d '.' -f4 <<< "$HOSTADD")"
+	
+	printr=($(lpstat -s|awk '{print$4}' | sed '/^$/d'))
+        for i in "${printr[@]}"
+        do
+                if [[ ${i} == *"socket://$IPADD/"* ]]; then
+                        echo "True"
+                        change $A,$B,$C,$D,$W,$X,$Y,$Z
+                elif [[ ${i} != *"socket://$IPADD/"* ]]; then
+                        echo "False"
+                fi
+        done
+        echo "Bye"	
+}
+
+main
+
+
