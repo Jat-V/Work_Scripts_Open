@@ -6,6 +6,7 @@ Select -ExpandProperty Name |
  
 ForEach-Object { rundll32 printui.dll,PrintUIEntry /dl /n "$_" }
 #The following will add and replace the ip with the host
-Add-PrinterPort -Name "YU-WHIT205-2-RESFRM-205B-MFP-2.stdusr.yale.internal" -PrinterHostAddress "YU-WHIT205-2-RESFRM-205B-MFP-2.stdusr.yale.internal"
-Add-Printer -Name "Whitney Host Printer" -DriverName "PCL6 Driver for Universal Print" -PortName "YU-WHIT205-2-RESFRM-205B-MFP-2.stdusr.yale.internal"
+Add-PrinterPort -Name "YU-WHIT205.edu" -PrinterHostAddress "YU-WHIT205.edu"
+Add-Printer -Name "Whitney Host Printer" -DriverName "PCL6 Driver for Universal Print" -PortName "YU-WHIT205.edu"
 [System.Windows.MessageBox]::Show('Done')
+#Driver can be specified and Whitney was used as an example
